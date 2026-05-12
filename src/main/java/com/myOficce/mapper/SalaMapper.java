@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.myOficce.dto.SalaDTO;
 import com.myOficce.entity.Sala;
+import com.myOficce.entity.Usuario;
 
 public class SalaMapper {
 
@@ -31,10 +32,12 @@ public class SalaMapper {
                 entity.getDescricao(),
                 entity.getImagem(),
                 entity.getLatitude(),
-                entity.getLongitude());
+                entity.getLongitude(),
+                entity.getUsuario() != null ? entity.getUsuario().getId_usuario() : null
+        );
     }
 
-    public static Sala toEntity(SalaDTO dto) {
+    public static Sala toEntity(SalaDTO dto, Usuario usuario) {
 
         if (dto == null) {
             return null;
@@ -58,6 +61,7 @@ public class SalaMapper {
         s.setImagem(dto.getImagem());
         s.setLatitude(dto.getLatitude());
         s.setLongitude(dto.getLongitude());
+        s.setUsuario(usuario);
 
         return s;
     }
@@ -71,12 +75,12 @@ public class SalaMapper {
                         .collect(Collectors.toList());
     }
 
-    public static List<Sala> toEntityList(List<SalaDTO> list) {
+    public static List<Sala> toEntityList(List<SalaDTO> list, Usuario usuario) {
 
         return list == null
                 ? List.of()
                 : list.stream()
-                        .map(SalaMapper::toEntity)
+                        .map(dto -> SalaMapper.toEntity(dto, usuario))
                         .collect(Collectors.toList());
     }
 }

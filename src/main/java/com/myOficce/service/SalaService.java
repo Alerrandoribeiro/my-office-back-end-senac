@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.myOficce.dto.SalaDTO;
 import com.myOficce.entity.Sala;
+import com.myOficce.entity.Usuario;
 import com.myOficce.mapper.SalaMapper;
 import com.myOficce.repository.SalaRepository;
+import com.myOficce.repository.UsuarioRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -19,8 +21,16 @@ public class SalaService {
     @Autowired
     private SalaRepository salaRepository;
 
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     public SalaDTO Cadastrar(SalaDTO dto) {
-        Sala salvo = salaRepository.save(SalaMapper.toEntity(dto));
+
+        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
+                .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado"));
+
+        Sala salvo = salaRepository.save(SalaMapper.toEntity(dto, usuario));
         return SalaMapper.toDTO(salvo);
     }
 
@@ -53,6 +63,13 @@ public class SalaService {
         existente.setImagem(dto.getImagem());
         existente.setLatitude(dto.getLatitude());
         existente.setLongitude(dto.getLongitude());
+
+         if (dto.getUsuarioId() != null) {
+            Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
+                    .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado"));
+            existente.setUsuario(usuario);
+        }
+
         return SalaMapper.toDTO(salaRepository.save(existente));
     }
 

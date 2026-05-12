@@ -16,6 +16,8 @@ public class SalaDTO {
     private String imagem;
     private String latitude;
     private String longitude;
+    private Long usuarioId;
+
 
     public SalaDTO() {
     }
@@ -34,7 +36,8 @@ public class SalaDTO {
             String descricao,
             String imagem,
             String latitude,
-            String longitude) {
+            String longitude,
+            Long usuarioId) {
 
         this.id_sala = id_sala;
         this.cep = cep;
@@ -50,6 +53,7 @@ public class SalaDTO {
         this.imagem = imagem;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.usuarioId = usuarioId;
     }
 
     public Long getId_sala() {
@@ -164,6 +168,14 @@ public class SalaDTO {
         this.longitude = longitude;
     }
 
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+    
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
     @Override
     public String toString() {
         return "SalaDTO [id_sala=" + id_sala
@@ -179,6 +191,7 @@ public class SalaDTO {
                 + ", descricao=" + descricao
                 + ", imagem=" + imagem
                 + ", latitude=" + latitude
-                + ", longitude=" + longitude + "]";
+                + ", longitude=" + longitude
+                + ", usuarioId=" + usuarioId + "]";
     }
 }

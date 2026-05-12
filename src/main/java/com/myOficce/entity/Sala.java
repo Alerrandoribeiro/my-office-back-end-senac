@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -54,6 +56,10 @@ public class Sala {
     @Column(nullable = false, length = 100)
     private String longitude;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
     public Sala() {
     }
 
@@ -70,7 +76,8 @@ public class Sala {
             String descricao,
             String imagem,
             String latitude,
-            String longitude) {
+            String longitude,
+            Usuario usuario) {
 
         this.cep = cep;
         this.estado = estado;
@@ -85,6 +92,7 @@ public class Sala {
         this.imagem = imagem;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.usuario = usuario;
     }
 
     public Long getId_sala() {
@@ -199,6 +207,14 @@ public class Sala {
         this.longitude = longitude;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
         return "Sala[id_sala=" + id_sala
@@ -214,6 +230,7 @@ public class Sala {
                 + ", descricao=" + descricao
                 + ", imagem=" + imagem
                 + ", latitude=" + latitude
-                + ", longitude=" + longitude + "]";
+                + ", longitude=" + longitude
+                + ", usuario_id=" + (usuario != null ? usuario.getId_usuario() : null) + "]";
     }
 }

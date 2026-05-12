@@ -32,6 +32,7 @@ public class SalaController {
 
         SalaDTO cadastrada = salaService.Cadastrar(dto);
 
+
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{id}")
             .buildAndExpand(cadastrada.getId_sala())
@@ -65,6 +66,5 @@ public class SalaController {
 
     return ResponseEntity.noContent().build();
    }
-
 
 }
