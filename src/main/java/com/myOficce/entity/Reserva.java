@@ -74,7 +74,7 @@ public class Reserva {
     @Override
     public String toString() {
         return "Reserva[id_reserva=" + id_reserva
-                + ", usuario_id=" + (usuario != null ? usuario.getId_usuario() : null)
+                + ", usuario_id=" + (usuario != null ? usuario.getId() : null)
                 + ", sala_id=" + (sala != null ? sala.getId_sala() : null)
                 + ", data=" + data + "]";
     }

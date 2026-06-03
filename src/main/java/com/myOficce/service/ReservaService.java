@@ -65,7 +65,7 @@ public class ReservaService {
         Reserva existente = reservaRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Reserva não encontrada com o id: " + id));
 
-        if (dto.getUsuarioId() != null && !existente.getUsuario().getId_usuario().equals(dto.getUsuarioId())) {
+        if (dto.getUsuarioId() != null && !existente.getUsuario().getId().equals(dto.getUsuarioId())) {
             Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
                     .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado"));
             existente.setUsuario(usuario);

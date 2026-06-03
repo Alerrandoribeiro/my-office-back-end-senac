@@ -10,10 +10,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "usuario")
 public class Usuario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_usuario;
+    @Column(name = "id_usuario")
+    private Long id;
 
     @Column(nullable = false, length = 100)
     private String nome;
@@ -27,17 +28,27 @@ public class Usuario {
     @Column(nullable = false, length = 100)
     private String senha;
 
-    public Long getId_usuario() {
-        return id_usuario;
+    public Usuario() {
     }
 
-    public void setId_usuario(Long id_usuario) {
-        this.id_usuario = id_usuario;
+    public Usuario(String nome, String email, String telefone, String senha) {
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
         return nome;
-    }   
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -67,20 +78,12 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Usuario() {
-    }
-    
-    public Usuario(String nome, String email, String telefone, String senha) {
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.senha = senha;
-    }
-
     @Override
     public String toString() {
-        return "Usuario[id_usuario=" + id_usuario +", nome= " + nome +", email= " + email +", telefone= " + telefone +", senha= " + senha +"]";
+        return "Usuario [id=" + id +
+                ", nome=" + nome +
+                ", email=" + email +
+                ", telefone=" + telefone +
+                ", senha=" + senha + "]";
     }
-
-
 }

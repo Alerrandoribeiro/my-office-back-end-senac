@@ -33,7 +33,7 @@ public class SalaMapper {
                 entity.getImagem(),
                 entity.getLatitude(),
                 entity.getLongitude(),
-                entity.getUsuario() != null ? entity.getUsuario().getId_usuario() : null
+                entity.getUsuario() != null ? entity.getUsuario().getId() : null
         );
     }
 

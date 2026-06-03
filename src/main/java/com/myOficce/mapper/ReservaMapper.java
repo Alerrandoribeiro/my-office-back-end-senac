@@ -21,7 +21,7 @@ public class ReservaMapper {
 
         return new ReservaDTO(
                 entity.getId_reserva(),
-                entity.getUsuario() != null ? entity.getUsuario().getId_usuario() : null,
+                entity.getUsuario() != null ? entity.getUsuario().getId() : null,
                 entity.getSala() != null ? entity.getSala().getId_sala() : null,
                 entity.getData()
         );

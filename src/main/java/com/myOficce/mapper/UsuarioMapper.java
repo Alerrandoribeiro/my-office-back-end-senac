@@ -16,7 +16,7 @@ public class UsuarioMapper {
             return null;
         }
         return new UsuarioDTO(
-                entity.getId_usuario(),
+                entity.getId(),
                 entity.getNome(),
                 entity.getEmail(),
                 entity.getTelefone(),
@@ -28,7 +28,7 @@ public class UsuarioMapper {
         if (dto == null)
             return null;
         Usuario u = new Usuario();
-        u.setId_usuario(dto.getId());
+        u.setId(dto.getId());
         u.setNome(dto.getNome());
         u.setEmail(dto.getEmail());
         u.setTelefone(dto.getTelefone());

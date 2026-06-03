@@ -231,6 +231,6 @@ public class Sala {
                 + ", imagem=" + imagem
                 + ", latitude=" + latitude
                 + ", longitude=" + longitude
-                + ", usuario_id=" + (usuario != null ? usuario.getId_usuario() : null) + "]";
+                + ", usuario_id=" + (usuario != null ? usuario.getId() : null) + "]";
     }
 }
