@@ -2,6 +2,7 @@ package com.myOficce.service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +19,29 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-
+    
     public UsuarioDTO Cadastrar(UsuarioDTO dto) {
+        if (usuarioRepository.existsByEmail(dto.getEmail())) {
+            throw new IllegalArgumentException("Email já cadastrado");
+        }
+
         Usuario salvo = usuarioRepository.save(UsuarioMapper.toEntity(dto));
         return UsuarioMapper.toDTO(salvo);
+    }
+
+    public UsuarioDTO login(UsuarioDTO dto) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(dto.getEmail());
+
+        Usuario usuario = usuarioOptional
+                .orElseThrow(() -> new IllegalArgumentException("Email ou senha inválidos"));
+
+        if (!usuario.getSenha().equals(dto.getSenha())) {
+            throw new IllegalArgumentException("Email ou senha inválidos");
+        }
+
+        UsuarioDTO usuarioDTO = UsuarioMapper.toDTO(usuario);
+        usuarioDTO.setSenha(null);
+        return usuarioDTO;
     }
 
     @Transactional()
