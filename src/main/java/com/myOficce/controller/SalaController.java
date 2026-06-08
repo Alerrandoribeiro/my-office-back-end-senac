@@ -27,19 +27,18 @@ public class SalaController {
     private SalaService salaService;
     
     @PostMapping
-    public ResponseEntity<SalaDTO> cadastrar(@RequestBody SalaDTO dto) {
+public ResponseEntity<SalaDTO> cadastrar(@RequestBody SalaDTO dto) {
+    // dto.imagem virá como String em Base64
+    // Processa normalmente
+    SalaDTO cadastrada = salaService.Cadastrar(dto);
+    
+    URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+        .path("/{id}")
+        .buildAndExpand(cadastrada.getId_sala())
+        .toUri();
 
-
-        SalaDTO cadastrada = salaService.Cadastrar(dto);
-
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-            .path("/{id}")
-            .buildAndExpand(cadastrada.getId_sala())
-            .toUri();
-
-        return ResponseEntity.created(location).body(cadastrada);
-    }
+    return ResponseEntity.created(location).body(cadastrada);
+}
    
      @GetMapping
    public ResponseEntity<List<SalaDTO>> listar() {

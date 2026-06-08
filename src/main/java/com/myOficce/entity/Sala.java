@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -44,16 +45,17 @@ public class Sala {
     @Column(nullable = false, length = 100)
     private String tipo_sala;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = true, length = 500)
     private String descricao;
 
-    @Column(nullable = false, length = 500)
+    @Lob
+    @Column(nullable = true, columnDefinition = "LONGTEXT")
     private String imagem;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = true, length = 100)
     private String latitude;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = true, length = 100)
     private String longitude;
 
     @ManyToOne
